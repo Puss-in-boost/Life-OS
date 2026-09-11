@@ -1,0 +1,3 @@
+import {NextResponse,type NextRequest} from 'next/server';
+export function proxy(request:NextRequest){const configured=Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL&&process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY);const protectedMode=configured||process.env.ALLOW_DEMO==='false';const session=configured?(request.cookies.has('life_access')||request.cookies.has('life_refresh')):request.cookies.has('life_session');if(protectedMode&&!session)return NextResponse.redirect(new URL('/login',request.url));return NextResponse.next();}
+export const config={matcher:['/','/dashboard','/tasks','/projects','/study','/fitness','/sleep','/finance','/journal','/weekly','/review','/profile']};
